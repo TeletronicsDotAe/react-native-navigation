@@ -40,6 +40,14 @@ class Modal extends Dialog implements DialogInterface.OnDismissListener, ScreenS
     private Layout layout;
     private boolean isDestroyed;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+
+    }
+
     public void setTopBarVisible(String screenInstanceId, boolean hidden, boolean animated) {
         layout.setTopBarVisible(screenInstanceId, hidden, animated);
     }
