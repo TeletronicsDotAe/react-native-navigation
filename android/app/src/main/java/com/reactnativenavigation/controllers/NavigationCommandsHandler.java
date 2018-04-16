@@ -163,14 +163,21 @@ public class NavigationCommandsHandler {
 
     public static void showModal(final Bundle params) {
         final NavigationActivity currentActivity = NavigationActivity.currentActivity;
-        if (currentActivity == null) {
+        final NavigationActivity lastActivity = NavigationActivity.lastActivity;
+        final NavigationActivity actualActivity;
+
+        if (currentActivity != null) {
+            actualActivity = currentActivity;
+        } else if (lastActivity != null) {
+            actualActivity = lastActivity;
+        } else {
             return;
         }
 
         NavigationApplication.instance.runOnMainThread(new Runnable() {
             @Override
             public void run() {
-                currentActivity.showModal(ScreenParamsParser.parse(params));
+                actualActivity.showModal(ScreenParamsParser.parse(params));
             }
         });
     }
