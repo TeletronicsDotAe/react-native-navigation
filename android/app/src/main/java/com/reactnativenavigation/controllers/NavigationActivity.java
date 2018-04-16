@@ -55,6 +55,7 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
      * Along with that, we should handle commands from the bridge using onNewIntent
      */
     static NavigationActivity currentActivity;
+    static NavigationActivity lastActivity;
     private static Promise startAppPromise;
 
     private ActivityParams activityParams;
@@ -149,6 +150,7 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
     @Override
     protected void onPause() {
         super.onPause();
+        lastActivity = currentActivity;
         currentActivity = null;
         IntentDataHandler.onPause(getIntent());
         getReactGateway().onPauseActivity(this);
