@@ -235,7 +235,8 @@ const NSInteger TRANSPARENT_NAVBAR_TAG = 78264803;
 
 - (void)sendGlobalScreenEvent:(NSString *)eventName endTimestampString:(NSString *)endTimestampStr shouldReset:(BOOL)shouldReset {
   
-  if (!self.commandType) return;
+  // https://github.com/wix/react-native-navigation/commit/c239985eb376c3aa89c4d3ca22316e6e1c560768
+  // if (!self.commandType) return;
   
   if ([self.view isKindOfClass:[RCTRootView class]]){
     NSString *screenName = [((RCTRootView*)self.view) moduleName];
