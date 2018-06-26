@@ -29,12 +29,13 @@ public class ScreenParamsParser extends Parser {
     public static ScreenParams parse(Bundle params) {
         ScreenParams result = new ScreenParams();
         result.screenId = params.getString(KEY_SCREEN_ID);
-        try {
-            result.timestamp = params.getDouble(KEY_TIMESTAMP);
-        } catch (ClassCastException cce) {
-            result.timestamp = params.getInt(KEY_TIMESTAMP);
+        Object timestamp = params.get(KEY_TIMESTAMP);
+        if (timestamp instanceof Integer) {
+            result.timestamp = ((int) timestamp) * 1.0;
+        } else if (timestamp instanceof  Double) {
+            result.timestamp = (double) timestamp;
         }
-
+        
         assertKeyExists(params, KEY_NAVIGATION_PARAMS);
         result.navigationParams = new NavigationParams(params.getBundle(KEY_NAVIGATION_PARAMS));
 
